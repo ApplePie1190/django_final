@@ -1,0 +1,26 @@
+{% extends 'recipes/base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+  <div class="content-section">
+    <div class="media">
+      <div class="media-body">
+        <h2 class="account-heading">{{ user.username }}</h2>
+        <p class="text-secondary">{{ user.email }}</p>
+        <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'add_recipe' %}">Добавить рецепт</a>
+      </div>
+    </div>
+  </div>
+  {% for recipe in recipes %}
+    <article class="media content-section">
+      <img class="rounded-circle account-img" src="{{ recipe.image.url }}" />
+      <div class="media-body">
+        <div class="article-metadata">
+          <small class="text-muted">{{ recipe.category }}</small>
+        </div>
+
+        <h2><a class="article-title" href="{% url 'detail' recipe.id %}">{{ recipe.title }}</a></h2>
+        <p class="article-content">{{ recipe.description }}</p>
+      </div>
+    </article>
+  {% endfor %}
+{% endblock %}
